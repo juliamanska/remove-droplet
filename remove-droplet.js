@@ -6,7 +6,7 @@ let ctx = canvas.getContext("2d");
 
 let y = 20;
 
-function Drople(x, y) {
+function Droplet(x, y) {
   this.x = x;
   this.y = y;
 
@@ -19,5 +19,17 @@ function Drople(x, y) {
     ctx.fillStyle = "blue";
     ctx.fill();
     ctx.stroke();
+    this.y += 1;
   };
 }
+
+let droplet = new Droplet(100, y);
+droplet.draw();
+
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, innerWidth, innerHeight);
+  droplet.draw();
+}
+
+animate();
