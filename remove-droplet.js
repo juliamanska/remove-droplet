@@ -27,9 +27,8 @@ function Droplet(x, y, dy, size) {
     }
 
     ctx.closePath();
-    ctx.fillStyle = "blue";
+    ctx.fillStyle = "rgb(84, 172, 230)";
     ctx.fill();
-    ctx.stroke();
     this.y += dy;
   };
 
