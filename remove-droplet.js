@@ -28,17 +28,46 @@ function Droplet(x, y, dy, size) {
     ctx.stroke();
     this.y += dy;
   };
+
+  this.isClicked = function (mouseX, mouseY) {
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.bezierCurveTo(
+      this.x - this.size,
+      this.y + this.size * 1.3,
+      this.x + this.size * 1.3,
+      this.y + this.size * 1.3,
+      this.x,
+      this.y
+    );
+    ctx.closePath();
+
+    return ctx.isPointInPath(mouseX, mouseY);
+  };
 }
 let dropletArray = [];
 
 for (let i = 0; i < 100; i++) {
   let x = Math.random() * innerWidth;
   let y = Math.random() * innerHeight;
-  let dy = (Math.random() + 2) * 1.3;
+  let dy = Math.random() + 0.8;
   let size = Math.random() * 20 + 30;
   dropletArray.push(new Droplet(x, y, dy, size));
   console.log(dy);
 }
+
+canvas.addEventListener("click", function (event) {
+  let mouseX = event.clientX;
+  let mouseY = event.clientY;
+
+  for (let i = 0; i < dropletArray.length; i++) {
+    if (dropletArray[i].isClicked(mouseX, mouseY)) {
+      dropletArray.splice(i, 1);
+      break;
+    }
+    console.log("clicked");
+  }
+});
 
 function animate() {
   requestAnimationFrame(animate);
