@@ -22,6 +22,10 @@ function Droplet(x, y, dy, size) {
       this.y
     );
 
+    if (this.y > innerHeight) {
+      this.y = 0;
+    }
+
     ctx.closePath();
     ctx.fillStyle = "blue";
     ctx.fill();
